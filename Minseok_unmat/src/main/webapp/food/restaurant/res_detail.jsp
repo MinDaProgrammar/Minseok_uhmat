@@ -57,5 +57,7 @@
                 <td colspan="4"></td>
             </tr>
         </table>
+        <button onclick="location.href='restaurantDelete.re?resName=${resInfo.resName}'">글 삭제</button>
+        <button onclick="location.href='restaurantModifyForm.re?resName=${resInfo.resName}'">글 수정</button>
 </body>
 </html>

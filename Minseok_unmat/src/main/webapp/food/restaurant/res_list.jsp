@@ -38,6 +38,7 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
+	<button onclick="location.href='restaurantWriteForm.re'">글쓰기</button>
 
 </body>
 </html>
