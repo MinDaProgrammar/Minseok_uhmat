@@ -190,4 +190,49 @@ public class RestaurantDAO {
 		return insertCount;
 	}
 
+	//식당 정보 삭제
+	public int deleteRestaurantInfo(String resName) {		
+		System.out.println("restaurantInfoDAO - deleteRestaurantInfo()");
+		int deleteCount = 0;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM restaurant_info WHERE res_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, resName);
+			deleteCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("deleteRestaurantInfo() - SQL 구문 오류!");
+		}finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
+	}
+	
+	//식당 정보 삭제 전 사진의 이름을 가져오는 메서드
+	public String selectPhoto(String resName) {
+		System.out.println("restaurantDAO - selectPhoto()");
+		String photo="";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT photo FROM restaurant_info WHERE res_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, resName);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				photo = rs.getString("photo");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectPhoto() - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return photo;
+	}
+
 }

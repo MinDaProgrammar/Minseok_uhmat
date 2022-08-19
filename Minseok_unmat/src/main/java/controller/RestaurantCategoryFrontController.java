@@ -110,29 +110,7 @@ public class RestaurantCategoryFrontController extends HttpServlet {
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 			}
-		}else if (command.equals("/restaurantModifyForm.re")) {
-
-			System.out.println("식당 수정 폼 요청!");
-			try {
-				action = new RestaurantModifyFormAction();
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} else if (command.equals("/restaurantModifyPro.re")) {
-
-			System.out.println("식당 수정 업데이트 요청!");
-			try {
-				action = new RestaurantModifyProAction();
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} 
+		}
 		// 추가로 태그와 카테고리 관련된 작업 요청이 더 필요함!!
 
 		else if (command.equals("/ReviewModifyForm.re")) {
