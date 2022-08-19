@@ -7,9 +7,9 @@ package vo;
 //);
 
 public class MapDTO {
-	private String resName;
-	private double longitude;
-	private double latitude;
+	private String resName;		//식당 이름
+	private double longitude;	//경도
+	private double latitude;	//위도
 	public String getResName() {
 		return resName;
 	}

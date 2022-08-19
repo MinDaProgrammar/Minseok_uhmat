@@ -51,4 +51,14 @@ public class RestaurantDeleteService {
 		return photo;
 	}
 
+	//지도 위치 정보를 삭제하는 메서드
+	public void deleteMapInfo(String resName) {
+		System.out.println("RestaurantDeleteService - deleteMapInfo");
+		Connection con = getConnection();
+		RestaurantDAO dao = RestaurantDAO.getInstance();
+		dao.deleteMapInfo(resName);
+		
+		close(con);
+	}
+
 }

@@ -18,7 +18,9 @@ public class RestaurantDeleteAction implements Action {
 		String resName = request.getParameter("resName");
 		String photo = service.bringPhoto(resName);
 		boolean isDeleteSuccess = service.deleteRestaurantInfo(resName,filePath, photo);
+		
 		if(isDeleteSuccess) {
+			service.deleteMapInfo(resName);
 			forward = new ActionForward();
 			forward.setPath("restaurantList.re");
 			forward.setRedirect(true);

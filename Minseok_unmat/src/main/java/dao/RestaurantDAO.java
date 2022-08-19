@@ -235,4 +235,50 @@ public class RestaurantDAO {
 		return photo;
 	}
 
+	//식당 위치의 지도 정보 1개 들고 오기
+	public MapDTO getMapInfo(String resName) {
+		MapDTO dto = null;
+		System.out.println("restaurantDAO - getMapInfo()");
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT * FROM map WHERE res_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, resName);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				dto = new MapDTO();
+				dto.setLongitude(rs.getDouble("longitude"));
+				dto.setLatitude(rs.getDouble("latitude"));
+				dto.setResName(rs.getString("res_name"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("getMapInfo() - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return dto;
+	}
+
+	//식당이 삭제 될 시 위치 정보도 같이 삭제
+	public void deleteMapInfo(String resName) {
+		System.out.println("restaurantDAO - deleteMapInfo()");
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "DELETE FROM map WHERE res_name =?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, resName);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("deleteMapInfo() - SQL 구문 오류!");
+		}finally {
+			close(pstmt);
+		}
+		
+	}
+
 }
