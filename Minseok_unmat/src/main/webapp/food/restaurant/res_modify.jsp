@@ -103,7 +103,7 @@ table{
 				<tr>
 					<th><label for="photo">식당 사진</label></th>
 
-					<td><input name="photo" type="file" id="photo"  accept="image/*" required="required" value="${resInfo.photo }"></td>
+					<td><input name="photo" type="file" id="photo"  accept="image/*" value="${resInfo.photo }"></td>
 
 				</tr>
 					

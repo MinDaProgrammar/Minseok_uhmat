@@ -308,4 +308,25 @@ public class RestaurantDAO {
 		return modifyCount;
 	}
 
+	public int updateMapInfo(MapDTO map) {
+		System.out.println("RestaurantDAO - updateMapInfo()");
+		int updateCount = 0;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "UPDATE map SET longitude=?, latitude=? WHERE res_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setDouble(1, map.getLongitude());
+			pstmt.setDouble(2, map.getLatitude());
+			pstmt.setString(3, map.getResName());
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("updateMapInfo - SQL 구문 오류!");
+		}finally {
+			close(pstmt);
+		}
+				
+		return updateCount;
+	}
+
 }
