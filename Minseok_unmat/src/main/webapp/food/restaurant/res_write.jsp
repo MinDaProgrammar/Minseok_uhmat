@@ -61,7 +61,7 @@ table{
 	<section id="writeForm">
 		<h2>식당 글 등록</h2>
 		<form action="restaurantWritePro.re" method="post" enctype="multipart/form-data">
-			<table>
+			<table> 
 				<tr>
 					<th><label for="res_name">식당이름</label></th>
 					<td><input type="text" name="res_name" id="res_name" required="required"></td>
