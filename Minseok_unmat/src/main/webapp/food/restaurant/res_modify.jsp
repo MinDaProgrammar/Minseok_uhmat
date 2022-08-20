@@ -72,12 +72,14 @@ table{
 	dto 객체 이름 : resInfo
 	 -->
 	<section id="writeForm">
-		<h2>식당 글 등록</h2>
-		<form action="restaurantWritePro.re" method="post" enctype="multipart/form-data">
+		<h2>식당 글 수정</h2>
+		<form action="restaurantModifyPro.re" method="post" enctype="multipart/form-data">
+			<input type="hidden" value="${resInfo.resName }" name="originalResName">
 			<table>
 				<tr>
 					<th><label for="res_name">식당이름</label></th>
-					<td><input type="text" name="res_name" id="res_name" required="required" value="${resInfo.resName }"></td>
+					<td><input type="text" name="res_name" id="res_name" required="required" value="${resInfo.resName }" readonly="readonly"></td>
+					<!-- 식당 이름이 Foreign key 로 걸려 있기에 수정 불가로 설정! -->
 				</tr>
 				<tr>
 					<th><label for="r_postcode">우편번호</label></th>
@@ -101,7 +103,7 @@ table{
 				<tr>
 					<th><label for="photo">식당 사진</label></th>
 
-					<td><input name="photo" type="file" id="photo"  accept="image/*" required="required"></td>
+					<td><input name="photo" type="file" id="photo"  accept="image/*" required="required" value="${resInfo.photo }"></td>
 
 				</tr>
 					
@@ -110,8 +112,8 @@ table{
 					<td><textarea id="res_link" name="res_link" cols="40" rows="15">${resInfo.resLink }</textarea></td>
 				</tr>
 			</table>
-			<h3>이미지 미리보기</h3>
-			<img src="${resInfo.photo }" alt="등록된 이미지 없음" id="image" width="300">
+			<h3>등록될 이미지 미리보기</h3>
+			<img src="upload/${resInfo.photo }" alt="등록된 이미지 없음" id="image" width="300">
 			<h3 style="text-align: center"> 영업 시간 등록</h3> 
 					(휴무시 선택X)<br>
 					<b>월</b> <input type="time" name="opentime" value="09:00">~<input type="time" name="closetime" value="22:00"> <br>

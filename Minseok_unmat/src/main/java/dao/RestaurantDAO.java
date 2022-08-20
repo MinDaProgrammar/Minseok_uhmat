@@ -281,4 +281,31 @@ public class RestaurantDAO {
 		
 	}
 
+	public int modifyResInfo(RestaurantInfoDTO dto) {
+		int modifyCount = 0;
+		System.out.println("RestaurantDAO - modifyResInfo()");
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "UPDATE restaurant_info SET "
+					+ "r_postcode=?, address=?,phone_number=?,opentime=?,res_link=?,photo=?,res_info=? WHERE res_name=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, dto.getrPostcode());
+			pstmt.setString(2, dto.getAddress());
+			pstmt.setString(3, dto.getPhoneNumber());
+			pstmt.setString(4, dto.getOpentime());
+			pstmt.setString(5, dto.getResLink());
+			pstmt.setString(6, dto.getPhoto());
+			pstmt.setString(7, dto.getResInfo());
+			pstmt.setString(8, dto.getResName());
+			modifyCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("mdoifyResInfo() - SQL 구문오류!");
+		}finally {
+			close(pstmt);
+		}
+		
+		return modifyCount;
+	}
+
 }

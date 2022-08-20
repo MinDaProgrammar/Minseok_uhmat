@@ -14,12 +14,13 @@ public class RestaurantDeleteAction implements Action {
 		ActionForward forward = null;
 		System.out.println("RestaurantDeleteAction");
 		RestaurantDeleteService service = new RestaurantDeleteService();
-		String filePath =  request.getServletContext().getRealPath("/upload");
 		String resName = request.getParameter("resName");
 		String photo = service.bringPhoto(resName);
+		String filePath =  request.getServletContext().getRealPath("/upload");
 		boolean isDeleteSuccess = service.deleteRestaurantInfo(resName,filePath, photo);
 		
 		if(isDeleteSuccess) {
+			//성공시 지도 정보도 같이 삭제
 			service.deleteMapInfo(resName);
 			forward = new ActionForward();
 			forward.setPath("restaurantList.re");
