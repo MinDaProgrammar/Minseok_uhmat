@@ -74,7 +74,7 @@ table{
 	<section id="writeForm">
 		<h2>식당 글 수정</h2>
 		<form action="restaurantModifyPro.re" method="post" enctype="multipart/form-data">
-			<input type="hidden" value="${resInfo.resName }" name="originalResName">
+			<input type="hidden" value="${resInfo.photo }" name="originalPhoto">
 			<table>
 				<tr>
 					<th><label for="res_name">식당이름</label></th>
@@ -135,8 +135,8 @@ table{
 			<p><em>지도를 클릭해주세요!</em></p> 
 			<div id="clickLatlng">
 			</div>
-				<input type="hidden" name="latitude" id="latitude">
-				<input type="hidden" name="longitude" id="longitude">
+				<input type="hidden" name="latitude" id="latitude" value=${map.latitude }>
+				<input type="hidden" name="longitude" id="longitude" value=${map.longitude }>
 			<br>
 			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=35185e429e5d9c68170c91b88e2d3a84"></script>
 			<script>

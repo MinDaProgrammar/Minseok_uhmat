@@ -56,7 +56,9 @@ public class RestaurantModifyProAction implements Action {
 		RestaurantModifyProService service = new RestaurantModifyProService();
 		boolean isModifySuccess = false;
 		String photo = service.bringPhoto(dto.getResName());
-		if(dto.getPhoto().equals("")) {	//사진을 수정하지 않았을 경우
+		System.out.println("photo: "+ photo);
+		System.out.println("dto - photo: "+dto.getPhoto());
+		if(dto.getPhoto() == null) {	//사진을 수정하지 않았을 경우
 			dto.setPhoto(photo);	//원래 사진을 dto 에 저장
 			isModifySuccess = service.modifyResInfo(dto);
 		}else {
