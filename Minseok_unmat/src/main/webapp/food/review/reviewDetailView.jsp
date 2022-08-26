@@ -6,40 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../../js/jquery-3.6.0.js"></script>
-<script>
-//JQUERY CODE
-
-const drawStar = (target) => {
-	alert((target.value));
-	var num = Integer.parseInt(target.value);
-    document.querySelector(`.star span`).style.width = "num";
-  }
+<script src="js/jquery-3.6.0.js"></script>
+<script type="text/javascript">
+	
+	function likeAdd(target) {
+		alert("click!");
+		
+		$.ajax({
+			type: "post",
+			url: "ReviewLikeAction.re?idx=${dto.idx}&nickname='nickname2'&pageNum=${param.pageNum}",
+			dataType: "text",
+			success:
+				function(response) {
+					location.reload();
+// 					alert("yes");
+// 					$("#like").load(window.location.href+" #like");
+// 					alert("yas");
+			}
+			
+		});
+	}
 </script>
 <style>
-  .star {
-    position: relative;
-    font-size: 2rem;
-    color: #ddd;
-  }
-  
-  .star input {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  .star span {
-    width: 0;
-    position: absolute; 
-    left: 0;
-    color: red;
-    overflow: hidden;
-    pointer-events: none;
-  }
+	.star-rating {width:205px; }
+	.star-rating,.star-rating span {display:inline-block; height:39px; overflow:hidden; background:url(image/star3.png)no-repeat; }
+	.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
 </style>
 </head>
 <body>
@@ -48,12 +39,15 @@ const drawStar = (target) => {
 		<details>
 			<summary>∙∙∙(more button)</summary> <!-- 이 부분은 로그인 되어 있는 경우에만 사용 가능  세션이 없을 경우
 			alert("로그인이 필요합니다") 처리-->
-			<a href="ReviewModifyForm.re?idx=${dto.idx }">수정</a>
-			<a href="ReviewDelete.re">삭제</a>
+
+			<input type="button" value="수정" onclick="location.href='ReviewModifyForm.re?idx=${dto.idx}&pageNum=${param.pageNum}'">
+			<input type="button" value="삭제" onclick="location.href='ReviewDeleteForm.re?idx=${dto.idx}&fileName=${dto.photo }&pageNum=${param.pageNum}'">
+			<input type="button" value="리스트로" onclick="location.href='ReviewList.re'">
 		</details>
 	</nav>
 	<section>
-		<table border ="2">
+		<table border ="1">
+
 			<tr>
 				<th>작성자</th><td >${dto.nickname }</td>
 				<!--  회원가입 로그인이 연동되면 nickname을 세션값으로받습니다. -->
@@ -62,7 +56,7 @@ const drawStar = (target) => {
 				<th>주제</th><td>${dto.subject }</td>
 			</tr>
 			<tr>
-				<th>Tag</th><td>#해쉬 #태그 #구현 #드가자</td> 
+				<th>Tag</th><td>${dto.tag_name }</td> 
 				<!-- select box 해쉬태그 제시를 통한 추가 조사 selectbox를DB에 추가해야함?
 					
 				-->
@@ -72,18 +66,15 @@ const drawStar = (target) => {
 				<!-- 지도 api와 연동 -->
 			</tr>
 			<tr>
-				<th>별점</th>
-				<td><span class="star">
-				  ★★★★★
-				  <span>★★★★★</span>
-				  <input type="range" oninput="drawStar(this)" value="0" step="0.5" min="0" max="5">
-				</span></td> <!--  CSS 로 구현 -->
+				<th>별점</th><td><div class='star-rating'><span style ="width:${dto.rating*20}%; "></span></div></td> <!--  CSS 로 구현 -->
 			</tr>
 			<tr>
 				<th>내용</th><td><textarea rows="20" cols="100">${dto.content }</textarea></td>
 			</tr>
 			<tr>
-				<th></th><td><input type="button" value="좋아요">&nbsp;<input type="button" value="댓글작성버튼">&nbsp;<input type="button" value="공유버튼"></td>				</tr>
+				<th><input type="button" id="like" value="${dto.likes }" onclick="likeAdd(this)"></th>
+				<td><input type="button" value="댓글작성버튼">&nbsp;<input type="button" value="공유버튼"></td></tr>
+
 			<tr>
 				<!-- 파일 첨부 형식은 input 태그의 type="file" 속성 사용 -->
 				<th>이미지</th><td width="200" height="300"><img width="90%" src="upload/${dto.photo }" alt="파일"></td>

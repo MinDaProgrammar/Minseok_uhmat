@@ -9,16 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.CheckHashAction;
 import action.RestaurantDeleteAction;
 import action.RestaurantDetailAction;
 import action.RestaurantListAction;
 import action.RestaurantModifyFormAction;
 import action.RestaurantModifyProAction;
 import action.RestaurantWriteProAction;
+import action.ReviewDeleteProAction;
 import action.ReviewDetailAction;
+import action.ReviewLikeAction;
 import action.ReviewListAction;
 import action.ReviewModifyFormAction;
 import action.ReviewModifyProAction;
+import action.ReviewWriteProAction;
 import vo.ActionForward;
 
 /**
@@ -113,39 +117,81 @@ public class RestaurantCategoryFrontController extends HttpServlet {
 		}
 		// 추가로 태그와 카테고리 관련된 작업 요청이 더 필요함!!
 
-		else if (command.equals("/ReviewModifyForm.re")) {
-			try {
-				action = new ReviewModifyFormAction();
+		 else if(command.equals("/ReviewWriteForm.re")) {
+				
+			 forward = new ActionForward();
+				forward.setPath("food/review/reviewWriteForm.jsp");
+				forward.setRedirect(false);
 
-				forward = action.execute(request, response);
-
+		} else if(command.equals("/ReviewWritePro.re")) {
+			 try {
+				action = new ReviewWriteProAction();
+				 forward = action.execute(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 
-		} else if (command.equals("/ReviewModifyProAction.re")) {
-			try {
-
-				action = new ReviewModifyProAction();
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-
-				e.printStackTrace();
-			}
-
-		} else if (command.equals("/ReviewDelete.re")) {
-			try {
+		} else if(command.equals("/ReviewDetail.re")) {
+			 try {
 				action = new ReviewDetailAction();
-
-				forward = action.execute(request, response);
-
+				 forward = action.execute(request, response);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 
-		} 
+		} else if(command.equals("/ReviewModifyForm.re")) {
+			 try {
+				action = new ReviewModifyFormAction();
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+		} else if(command.equals("/ReviewModifyProAction.re")) {
+			 try {
+				action = new ReviewModifyProAction();
+				 forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+		} else if(command.equals("/ReviewDeleteForm.re")) {
+			forward = new ActionForward();
+			forward.setPath("food/review/reviewDeleteForm.jsp");
+			forward.setRedirect(false);
+			
+		} else if(command.equals("/ReviewDeleteProAction.re")) {
+			 try {
+				action = new ReviewDeleteProAction();
+				 forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+		} else if(command.equals("/ReviewLikeAction.re")) {
+			 try {
+				action = new ReviewLikeAction();
+				 forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+		} else if(command.equals("/CheckHash.re")) {
+			 try {
+				action = new CheckHashAction();
+				 forward = action.execute(request, response);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+
+		}
 
 		if (forward != null)
 

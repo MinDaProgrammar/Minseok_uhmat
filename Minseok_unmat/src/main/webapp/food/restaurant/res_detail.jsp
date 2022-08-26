@@ -89,5 +89,6 @@
         
         <button onclick="location.href='restaurantDelete.re?resName=${resInfo.resName}'">글 삭제</button>
         <button onclick="location.href='restaurantModifyForm.re?resName=${resInfo.resName}'">글 수정</button>
+        <button onclick="location.href='restaurantList.re'">글 목록으로 돌아가기</button>
 </body>
 </html>
