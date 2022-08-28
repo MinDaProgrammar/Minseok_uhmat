@@ -69,64 +69,64 @@
         
 	<ul>
 		<li>
-		    <a href=''>
+		    <a href='restaurantList.re?category=족발·보쌈'>
 		    <span>족발·보쌈</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Blogger'>
+		    <a href='restaurantList.re?category=찜·탕·찌개'>
 		    <span>찜·탕·찌개</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Seo'>
+		    <a href='restaurantList.re?category=돈까스·회·일식'>
 		    <span>돈까스·회·일식</span></a>
 		</li>
 		        
 		<li>
-		    <a href='#' title='News'>
+		    <a href='restaurantList.re?category=피자'>
 		    <span>피자</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+			 <a href='restaurantList.re?category=고기·구이'>
 		    <span>고기·구이</span></a>
 		</li>
 		
 		
 		<li>
-		    <a href='#' title='Telegram'>
+		     <a href='restaurantList.re?category=치킨'>
 		    <span>치킨</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+		     <a href='restaurantList.re?category=중식'>
 		    <span>중식</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+		     <a href='restaurantList.re?category=도시락'>
 		    <span>도시락</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+		     <a href='restaurantList.re?category=패스트푸드'>
 		    <span>패스트푸드</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+		     <a href='restaurantList.re?category=분식1'>
 		    <span>분식1</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
+		     <a href='restaurantList.re?category=분식2'>
 		    <span>분식2</span></a>
 		</li>
 		
 		<li>
-		    <a href='#' title='Subscribe'>
-		    <span>카페디저트</span></a>
+		    <a href='restaurantList.re?category=돈까스·회·일식'>
+		    <span>카페·디저트</span></a>
 		</li>
 		
 	</ul>

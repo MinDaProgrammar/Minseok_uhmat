@@ -19,7 +19,7 @@ public class ReviewListAction implements Action {
 		
 		//페이징 처리를 위한 변수 선언
 		int pageNum = 1;
-		int listLimit = 6;
+		int listLimit = 10;
 		int pageLimit = 10;
 		
 		

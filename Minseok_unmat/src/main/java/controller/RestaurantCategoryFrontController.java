@@ -114,6 +114,11 @@ public class RestaurantCategoryFrontController extends HttpServlet {
 				// TODO Auto-generated catch block 
 				e.printStackTrace();
 			}
+		} else if (command.equals("/resCategory.re")) {
+			System.out.println("음식 종류별 식당 보기 요청!");
+			forward = new ActionForward();
+			forward.setPath("food/restaurant/category_page.jsp");
+			forward.setRedirect(false);
 		}
 		// 추가로 태그와 카테고리 관련된 작업 요청이 더 필요함!!
 
