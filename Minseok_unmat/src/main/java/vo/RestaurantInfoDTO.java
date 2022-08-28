@@ -24,13 +24,21 @@ public class RestaurantInfoDTO {
 	private String photo; //식당 사진
 	private float rating;	//별점
 	private int reviewCount; //식당 리뷰 개수
-	
+	private String category; // 식당 카테고리 (DB 수정 필요)
 	
 	@Override
 	public String toString() {
 		return "RestaurantInfoDTO [resName=" + resName + ", rPostcode=" + rPostcode + ", address=" + address
 				+ ", resInfo=" + resInfo + ", phoneNumber=" + phoneNumber + ", opentime=" + opentime + ", resLink="
-				+ resLink + ", photo=" + photo + ", rating=" + rating + ", reviewCount=" + reviewCount + "]";
+				+ resLink + ", photo=" + photo + ", rating=" + rating + ", reviewCount=" + reviewCount + ", category="
+				+ category + "]";
+	}
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getResInfo() {
 		return resInfo;

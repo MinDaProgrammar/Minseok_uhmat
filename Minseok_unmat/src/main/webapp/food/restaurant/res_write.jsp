@@ -36,7 +36,7 @@ table{
 	text-align: center;
 }
 </style>
-<script src="js/jquery-3.6.0.js"></script>
+<script src="/backup/js/jquery-3.6.0.js"></script>
 <script>
 	//ready event
 	$(function(){
@@ -53,33 +53,41 @@ table{
 		        reader.readAsDataURL(input.files[0]);
 		    }
 		}
+		
+		//더보기 클릭 시 음식 카테고리 선택 가능
+		$("#more").click(function(){
+			alert("버튼 선택!");
+			$.ajax({
+				url:"category_show.jsp",
+				success: function(res){
+					$("#showCategory").html(res);
+				}
+			})
+		})
+		
 	});
+	
+	
 
 </script>
 </head>
 <body>
 	<section id="writeForm">
 		<h2>식당 글 등록</h2>
+		<div id="showCategory">
+		</div>
 		<form action="restaurantWritePro.re" method="post" enctype="multipart/form-data">
 			<table> 
 				<tr>
-					<th><label for="res_name">식당이름</label></th>
-					<td><input type="text" name="res_name" id="res_name" required="required"></td>
-				</tr>
-				<tr>
 					<th><label for="category">카테고리 선택</label></th>
 					<td>
-						<select name="category" id="category">
-							<option value="족발">족발</option>
-							<option value="보쌈">보쌈</option>
-							<option value="찜">찜</option>
-							<option value="일식">일식</option>
-							<option value="피자&파스타">피자&파스타</option>
-							<option value="고기&구이">고기&구이</option>
-							<option value="도시락">도시락</option>
-							<option value="중식">중식</option>
-						</select>
+						<input type="text" readonly="readonly" name="category" id="insertCategory">
+						<button id="more">카테고리 보기</button>
 					</td>
+				</tr>
+				<tr>
+					<th><label for="res_name">식당이름</label></th>
+					<td><input type="text" name="res_name" id="res_name" required="required"></td>
 				</tr>
 				<!-- 다음 주소로 교체할 수도? -->
 				<tr>

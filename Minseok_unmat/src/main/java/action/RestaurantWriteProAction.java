@@ -35,6 +35,7 @@ public class RestaurantWriteProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8",new DefaultFileRenamePolicy());
 
 		RestaurantInfoDTO dto = new RestaurantInfoDTO();
+		dto.setCategory(multi.getParameter("category"));
 		dto.setResName(multi.getParameter("res_name"));
 		dto.setrPostcode(multi.getParameter("r_postcode"));
 		dto.setAddress(multi.getParameter("address"));

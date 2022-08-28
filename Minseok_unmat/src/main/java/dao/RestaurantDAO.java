@@ -106,7 +106,7 @@ public class RestaurantDAO {
 		System.out.println("RestaurantDAO - insertResInfo()");
 		PreparedStatement pstmt = null;
 		try {
-			String sql = "INSERT INTO restaurant_info VALUES(?,?,?,0,?,?,?,?,?,0)";
+			String sql = "INSERT INTO restaurant_info VALUES(?,?,?,0,?,?,?,?,?,0,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getResName());
 			pstmt.setString(2, dto.getrPostcode());
@@ -116,6 +116,7 @@ public class RestaurantDAO {
 			pstmt.setString(6, dto.getResLink());
 			pstmt.setString(7, dto.getPhoto());
 			pstmt.setString(8, dto.getResInfo());
+			pstmt.setString(9, dto.getCategory());
 			
 
 			System.out.println(dto);
