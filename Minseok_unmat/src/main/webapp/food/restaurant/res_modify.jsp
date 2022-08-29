@@ -98,17 +98,17 @@ table{
 						<select name="category">
 							<option value="" selected="selected">선택</option>
 							<option value="족발·보쌈">족발·보쌈</option>
-							<option value="족발·보쌈">찜·탕·찌개</option>
-							<option value="족발·보쌈">돈까스·회·일식</option>
-							<option value="족발·보쌈">피자</option>
-							<option value="족발·보쌈">고기·구이</option>
-							<option value="족발·보쌈">치킨</option>
-							<option value="족발·보쌈">중식</option>
-							<option value="족발·보쌈">도시락</option>
-							<option value="족발·보쌈">패스트푸드</option>
-							<option value="족발·보쌈">분식1</option>
-							<option value="족발·보쌈">분식2</option>
-							<option value="족발·보쌈">카페·디저트</option>
+							<option value="찜·탕·찌개">찜·탕·찌개</option>
+							<option value="돈까스·회·일식">돈까스·회·일식</option>
+							<option value="피자">피자</option>
+							<option value="고기·구이">고기·구이</option>
+							<option value="치킨">치킨</option>
+							<option value="중식">중식</option>
+							<option value="도시락">도시락</option>
+							<option value="패스트푸드">패스트푸드</option>
+							<option value="분식1">분식1</option>
+							<option value="분식2">분식2</option>
+							<option value="카페·디저트">카페·디저트</option>
 						</select>
 						<input type="button" id="more" value="카테고리 보기">
 					</td>
