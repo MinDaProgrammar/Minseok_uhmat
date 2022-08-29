@@ -36,7 +36,7 @@ table{
 	text-align: center;
 }
 </style>
-<script src="/backup/js/jquery-3.6.0.js"></script>
+<script src="js/jquery-3.6.0.js"></script>
 <script>
 	//ready event
 	$(function(){
@@ -58,7 +58,7 @@ table{
 		$("#more").click(function(){
 			alert("버튼 선택!");
 			$.ajax({
-				url:"category_show.jsp",
+				url:"food/restaurant/category_show.jsp",
 				success: function(res){
 					$("#showCategory").html(res);
 				}
@@ -81,7 +81,21 @@ table{
 				<tr>
 					<th><label for="category">카테고리 선택</label></th>
 					<td>
-						<input type="text" readonly="readonly" name="category" id="insertCategory">
+						<select name="category">
+							<option value="" selected="selected">선택</option>
+							<option value="족발·보쌈">족발·보쌈</option>
+							<option value="족발·보쌈">찜·탕·찌개</option>
+							<option value="족발·보쌈">돈까스·회·일식</option>
+							<option value="족발·보쌈">피자</option>
+							<option value="족발·보쌈">고기·구이</option>
+							<option value="족발·보쌈">치킨</option>
+							<option value="족발·보쌈">중식</option>
+							<option value="족발·보쌈">도시락</option>
+							<option value="족발·보쌈">패스트푸드</option>
+							<option value="족발·보쌈">분식1</option>
+							<option value="족발·보쌈">분식2</option>
+							<option value="족발·보쌈">카페·디저트</option>
+						</select>
 						<button id="more">카테고리 보기</button>
 					</td>
 				</tr>

@@ -288,7 +288,7 @@ public class RestaurantDAO {
 		PreparedStatement pstmt = null;
 		try {
 			String sql = "UPDATE restaurant_info SET "
-					+ "r_postcode=?, address=?,phone_number=?,opentime=?,res_link=?,photo=?,res_info=? WHERE res_name=?";
+					+ "r_postcode=?, address=?,phone_number=?,opentime=?,res_link=?,photo=?,res_info=?,category=? WHERE res_name=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, dto.getrPostcode());
 			pstmt.setString(2, dto.getAddress());
@@ -298,6 +298,7 @@ public class RestaurantDAO {
 			pstmt.setString(6, dto.getPhoto());
 			pstmt.setString(7, dto.getResInfo());
 			pstmt.setString(8, dto.getResName());
+			pstmt.setString(9, dto.getCategory());
 			modifyCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

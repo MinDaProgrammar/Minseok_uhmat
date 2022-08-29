@@ -38,22 +38,37 @@ table{
 </style>
 <script src="js/jquery-3.6.0.js"></script>
 <script>
-	//ready event
-	$(function(){
-		$('#photo').change(function(){
-		    setImageFromFile(this, '#image');
-		});
-
-		function setImageFromFile(input, expression) {
-		    if (input.files && input.files[0]) {
-		        var reader = new FileReader();
-		        reader.onload = function (e) {
-		            $(expression).attr('src', e.target.result);
-		        }
-		        reader.readAsDataURL(input.files[0]);
-		    }
-		}
+$(function(){
+	$('#photo').change(function(){
+	    setImageFromFile(this, '#image');
 	});
+
+	function setImageFromFile(input, expression) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $(expression).attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	//더보기 클릭 시 음식 카테고리 선택 가능
+	$("#more").click(function(){
+		alert("버튼 선택!");
+		$.ajax({
+			url:"food/restaurant/category_show.jsp",
+			success: function(res){
+				$("#showCategory").html(res);
+			}
+			error: function(){
+				alert("실패!");
+			}
+		})
+	})
+	
+});
+
 
 </script>
 </head>
@@ -73,9 +88,32 @@ table{
 	 -->
 	<section id="writeForm">
 		<h2>식당 글 수정</h2>
+		<div id="showCategory">
+		</div>
 		<form action="restaurantModifyPro.re" method="post" enctype="multipart/form-data">
 			<input type="hidden" value="${resInfo.photo }" name="originalPhoto">
 			<table>
+				<tr>
+					<th><label for="category">카테고리 선택</label></th>
+					<td>
+						<select name="category">
+							<option value="" selected="selected">선택</option>
+							<option value="족발·보쌈">족발·보쌈</option>
+							<option value="족발·보쌈">찜·탕·찌개</option>
+							<option value="족발·보쌈">돈까스·회·일식</option>
+							<option value="족발·보쌈">피자</option>
+							<option value="족발·보쌈">고기·구이</option>
+							<option value="족발·보쌈">치킨</option>
+							<option value="족발·보쌈">중식</option>
+							<option value="족발·보쌈">도시락</option>
+							<option value="족발·보쌈">패스트푸드</option>
+							<option value="족발·보쌈">분식1</option>
+							<option value="족발·보쌈">분식2</option>
+							<option value="족발·보쌈">카페·디저트</option>
+						</select>
+						<button id="more">카테고리 보기</button>
+					</td>
+				</tr>
 				<tr>
 					<th><label for="res_name">식당이름</label></th>
 					<td><input type="text" name="res_name" id="res_name" required="required" value="${resInfo.resName }" readonly="readonly"></td>

@@ -17,6 +17,9 @@ public class RestaurantModifyProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		System.out.println("RestaurantModifyProAction");
+		
+		request.setCharacterEncoding("UTF-8");
+		
 		// 파일첨부를 위한 multipart request 사용
 		String uploadPath = "/upload"; // 루트(webapp)의 하위 폴더 upload 에 저장
 		String realPath = request.getServletContext().getRealPath(uploadPath);
@@ -24,6 +27,7 @@ public class RestaurantModifyProAction implements Action {
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8",new DefaultFileRenamePolicy());
 
 		RestaurantInfoDTO dto = new RestaurantInfoDTO();
+		dto.setCategory(multi.getParameter("category"));
 		dto.setResName(multi.getParameter("res_name"));
 		dto.setrPostcode(multi.getParameter("r_postcode"));
 		dto.setAddress(multi.getParameter("address"));
