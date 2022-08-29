@@ -77,63 +77,63 @@
        
 	<ul>
 		<li>
-		    <a href='#'>
+		    <a>
 		    <span>족발·보쌈</span></a>
 		</li>
 		
 		<li>
-		    <a href='#'>
+		    <a>
 		    <span>찜·탕·찌개</span></a>
 		</li>
 		
 		<li>
-		    <a href='#'>
+		    <a>
 		    <span>돈까스·회·일식</span></a>
 		</li>
 		        
 		<li>
-		    <a href='#'>
+		    <a>
 		    <span>피자</span></a>
 		</li>
 		
 		<li>
-			 <a href='#'>
+			 <a>
 		    <span>고기·구이</span></a>
 		</li>
 		
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>치킨</span></a>
 		</li>
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>중식</span></a>
 		</li>
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>도시락</span></a>
 		</li>
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>패스트푸드</span></a>
 		</li>
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>분식1</span></a>
 		</li>
 		
 		<li>
-		     <a href='#'>
+		     <a>
 		    <span>분식2</span></a>
 		</li>
 		
 		<li>
-		    <a href='#'>
+		    <a>
 		    <span>카페·디저트</span></a>
 		</li>
 		

@@ -31,7 +31,7 @@ public class RestaurantWriteProAction implements Action {
 //	 	out.println(realPath);
 
 		String realPath = request.getServletContext().getRealPath(uploadPath);
-		int fileSize = 1024 * 1024 * 10; // byte -> MB -> 10MB
+		int fileSize = 1024 * 1024 * 20; // byte -> MB -> 10MB
 		MultipartRequest multi = new MultipartRequest(request, realPath, fileSize, "UTF-8",new DefaultFileRenamePolicy());
 
 		RestaurantInfoDTO dto = new RestaurantInfoDTO();
@@ -80,7 +80,7 @@ public class RestaurantWriteProAction implements Action {
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/html; charset=UTF-8");
 
-			out.print("<script>alert('식당 입력 실패!');history.back();</script>");
+			out.print("<script>alert('식당 입력 실패! 이미 존재하는 식당일수도!?');history.back();</script>");
 		}
 		
 		return forward;
