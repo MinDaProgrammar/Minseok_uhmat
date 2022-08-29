@@ -33,7 +33,7 @@ public class RestaurantCategoryFrontController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-
+		response.setCharacterEncoding("UTF-8");
 		String command = request.getServletPath();
 		System.out.println(command);
 		ActionForward forward = null;

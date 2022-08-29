@@ -56,7 +56,7 @@ table{
 		
 		//더보기 클릭 시 음식 카테고리 선택 가능
 		$("#more").click(function(){
-			alert("버튼 선택!");
+// 			alert("버튼 선택!");
 			$.ajax({
 				url:"food/restaurant/category_show.jsp",
 				success: function(res){

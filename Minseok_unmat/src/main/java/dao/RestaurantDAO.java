@@ -82,6 +82,54 @@ public class RestaurantDAO {
 				dto.setPhoto(rs.getString("photo"));
 				dto.setReviewCount(rs.getInt("reviewCount"));
 				dto.setRating(rs.getFloat("rating"));
+				dto.setCategory(rs.getString("category"));
+				System.out.println(dto);
+
+				list.add(dto);				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectRestaurantList - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	//선택된 카테고리 목록을 페이징처리하여 조회 
+	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, int listLimit, String category) {
+		System.out.println("RestaurantDAO-selectRestaurantList");
+		List<RestaurantInfoDTO> list = null;
+		int startPage = (pageNum-1)*listLimit;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM restaurant_info WHERE category=? ORDER BY res_name LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, startPage);
+			pstmt.setInt(3, listLimit);
+			rs = pstmt.executeQuery();
+			
+
+			list = new ArrayList<RestaurantInfoDTO>();
+
+			while(rs.next()) {
+				RestaurantInfoDTO dto = new RestaurantInfoDTO();
+				dto.setResName(rs.getString("res_name"));
+				dto.setrPostcode(rs.getString("r_postcode"));
+
+				dto.setAddress(rs.getString("address"));
+				dto.setPhoneNumber(rs.getString("phone_number"));
+				dto.setOpentime(rs.getString("opentime"));
+				dto.setResLink(rs.getString("res_link"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setReviewCount(rs.getInt("reviewCount"));
+				dto.setRating(rs.getFloat("rating"));
+				dto.setCategory(rs.getString("category"));
 				
 				System.out.println(dto);
 
@@ -97,7 +145,6 @@ public class RestaurantDAO {
 		
 		return list;
 	}
-
 
 	//식당 정보 입력
 
@@ -158,6 +205,7 @@ public class RestaurantDAO {
 				dto.setReviewCount(rs.getInt("reviewCount"));
 				dto.setRating(rs.getFloat("rating"));
 				dto.setResInfo(rs.getString("res_info"));
+				dto.setCategory(rs.getString("category"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -297,8 +345,8 @@ public class RestaurantDAO {
 			pstmt.setString(5, dto.getResLink());
 			pstmt.setString(6, dto.getPhoto());
 			pstmt.setString(7, dto.getResInfo());
-			pstmt.setString(8, dto.getResName());
-			pstmt.setString(9, dto.getCategory());
+			pstmt.setString(8, dto.getCategory());
+			pstmt.setString(9, dto.getResName());
 			modifyCount = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -330,5 +378,7 @@ public class RestaurantDAO {
 				
 		return updateCount;
 	}
+
+	
 
 }

@@ -38,37 +38,36 @@ table{
 </style>
 <script src="js/jquery-3.6.0.js"></script>
 <script>
-$(function(){
-	$('#photo').change(function(){
-	    setImageFromFile(this, '#image');
-	});
+	//ready event
+	$(function(){
+		$('#photo').change(function(){
+		    setImageFromFile(this, '#image');
+		});
 
-	function setImageFromFile(input, expression) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-	            $(expression).attr('src', e.target.result);
-	        }
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
-	//더보기 클릭 시 음식 카테고리 선택 가능
-	$("#more").click(function(){
-		alert("버튼 선택!");
-		$.ajax({
-			url:"food/restaurant/category_show.jsp",
-			success: function(res){
-				$("#showCategory").html(res);
-			}
-			error: function(){
-				alert("실패!");
-			}
+		function setImageFromFile(input, expression) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        reader.onload = function (e) {
+		            $(expression).attr('src', e.target.result);
+		        }
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+		
+		//더보기 클릭 시 음식 카테고리 선택 가능
+		$("#more").click(function(){
+// 			alert("버튼 선택!");
+			$.ajax({
+				url:"food/restaurant/category_show.jsp",
+				success: function(res){
+					$("#showCategory").html(res);
+				}
+			})
 		})
-	})
+		
+	});
 	
-});
-
+	
 
 </script>
 </head>
@@ -111,7 +110,7 @@ $(function(){
 							<option value="족발·보쌈">분식2</option>
 							<option value="족발·보쌈">카페·디저트</option>
 						</select>
-						<button id="more">카테고리 보기</button>
+						<input type="button" id="more" value="카테고리 보기">
 					</td>
 				</tr>
 				<tr>
@@ -130,7 +129,7 @@ $(function(){
 				<tr>
 					<th><label for="phone_number">식당 전화번호</label></th>
 
-					<td><input type="tel" pattern="[0-9]{3}-[0-9]{3-4}-[0-9]{4}" id="phone_number" name="phone_number" value="${resInfo.phoneNumber }"></td>
+					<td><input type="tel" name="phone_number" value="${resInfo.phoneNumber }"></td>
 
 				</tr>
 				

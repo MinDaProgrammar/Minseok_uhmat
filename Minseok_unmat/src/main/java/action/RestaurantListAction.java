@@ -42,14 +42,21 @@ public class RestaurantListAction implements Action {
 		}
 		
 		//2.페이지 개수만큼의 글 목록을 가져오기 
-		List<RestaurantInfoDTO> list = service.selelctRestaurantList(pageNum,listLimit);
+		String category = request.getParameter("category");
+		List<RestaurantInfoDTO> list = null;
+		//카테고리로 검색될 경우
+		if(category != null) {
+			list = service.selelctRestaurantList(pageNum,listLimit,category);
+		}else { //전체 검색일 경우
+			list = service.selelctRestaurantList(pageNum,listLimit);			
+		}
 		
 		
 		PageInfo pageInfo = new PageInfo(pageNum, maxPage, startPage, endPage, listCount);
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("restaurantInfo", list);
 		forward = new ActionForward();
-		forward.setPath("food/restaurant/res_list.jsp");
+		forward.setPath("food/restaurant/res_list.jsp?pageNum="+pageNum);
 		forward.setRedirect(false);
 		return forward;
 	}

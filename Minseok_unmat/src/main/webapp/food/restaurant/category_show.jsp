@@ -5,8 +5,14 @@
 <html lang="en">
 <head>
 <title>Category Page</title>
-<script src="/backup/js/jquery-3.6.0.js"></script>
+<script src="js/jquery-3.6.0.js"></script>
 <script>
+	$(function(){
+		$("a").on("click",function(){
+			 var idx = $('a').index(this);
+			 $("select>option").eq(idx+1).attr("selected","selected");
+		})
+	});
 </script>
 <style>
 

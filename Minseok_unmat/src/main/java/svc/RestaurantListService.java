@@ -29,6 +29,20 @@ public class RestaurantListService {
 		dao.setConnection(con);
 		list = dao.selectRestaurantList(pageNum, listLimit);
 		
+		close(con);
+		return list;
+	}
+
+
+	public List<RestaurantInfoDTO> selelctRestaurantList(int pageNum, int listLimit, String category) {
+		System.out.println("RestaurantListService-selelctRestaurantList");
+		List<RestaurantInfoDTO> list = null;
+		Connection con = getConnection();
+		RestaurantDAO dao = RestaurantDAO.getInstance();
+		dao.setConnection(con);
+		list = dao.selectRestaurantList(pageNum, listLimit,category);
+		
+		close(con);
 		return list;
 	}
 
