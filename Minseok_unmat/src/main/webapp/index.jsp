@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title> 
  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-  <script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
+  <script type="text/javascript" src="js/jquery-3.6.0.js"></script>
   <style type="text/css">
   iframe {
   border: 1px solid;

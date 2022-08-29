@@ -8,35 +8,30 @@
 <title>Insert title here</title>
 <script src="js/jquery-3.6.0.js"></script>
 <script>
-window.onscroll = function() {
+	//스크롤 이벤트 발생
+	window.onscroll = function() {
 	
-	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-	
-		$.ajax({
-			type: "post",
-			url: "restaurantList.re?pageNum=${pageInfo.pageNum + 1}",
-			data: $("#list").serialize(),
-			dataType: "text",
-			success: 
-				function(response) {
-					if(${pageInfo.endPage} == ${pageInfo.pageNum + 1}) {
-						$("#writeForm").remove();
-						$("#header").remove();
-						$("#footer").remove();
-						$("#append").html(response);
-					
-					}
-				}
-		});
+		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+// 			alert("바닥에 닿음");
+			$.ajax({
+				type: "post",
+				url: "restaurantList.re?pageNum=${pageInfo.pageNum + 1}",
+				data: {
+					startPage : ${pageInfo.startPage +1}
+				},
+				dataType: "text",
+				
+				success: 
+					function(response) {
+						if(${pageInfo.endPage} > ${pageInfo.pageNum + 1}) {
+							$("#append").html(response);
+						}
+					},
+			});
+		} 
 	}
-}
 
 </script>
-<style>
-	.star-rating {width:205px; }
-	.star-rating,.star-rating span {display:inline-block; height:39px; overflow:hidden; background:url(image/star3.png)no-repeat; }
-	.star-rating span{background-position:left bottom; line-height:0; vertical-align:top; }
-</style>
 </head>
 <body>
 	<h1>restaurantList Page</h1>
@@ -69,6 +64,12 @@ window.onscroll = function() {
 			</c:otherwise>
 		</c:choose>
 	</table>
+	
+	<section id="append">
+	
+	</section>
 	<button onclick="location.href='restaurantWriteForm.re'">글쓰기</button>
+	<button onclick="location.href='resCategory.re'">카테고리 보기</button>
+	<button onclick="location.href='index.jsp'">홈으로</button>
 </body>
 </html>

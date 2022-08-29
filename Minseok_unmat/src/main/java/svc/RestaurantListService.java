@@ -21,26 +21,26 @@ public class RestaurantListService {
 	}
 	
 	
-	public List<RestaurantInfoDTO> selelctRestaurantList(int pageNum, int listLimit) {	//글목록을 정해진 개수만큼 불러오는 메서드
+	public List<RestaurantInfoDTO> selelctRestaurantList(int startPage, int listLimit) {	//글목록을 정해진 개수만큼 불러오는 메서드
 		System.out.println("RestaurantListService-selelctRestaurantList");
 		List<RestaurantInfoDTO> list = null;
 		Connection con = getConnection();
 		RestaurantDAO dao = RestaurantDAO.getInstance();
 		dao.setConnection(con);
-		list = dao.selectRestaurantList(pageNum, listLimit);
+		list = dao.selectRestaurantList(startPage, listLimit);
 		
 		close(con);
 		return list;
 	}
 
 
-	public List<RestaurantInfoDTO> selelctRestaurantList(int pageNum, int listLimit, String category) {
+	public List<RestaurantInfoDTO> selelctRestaurantList(int startPage, int listLimit, String category) {
 		System.out.println("RestaurantListService-selelctRestaurantList");
 		List<RestaurantInfoDTO> list = null;
 		Connection con = getConnection();
 		RestaurantDAO dao = RestaurantDAO.getInstance();
 		dao.setConnection(con);
-		list = dao.selectRestaurantList(pageNum, listLimit,category);
+		list = dao.selectRestaurantList(startPage, listLimit,category);
 		
 		close(con);
 		return list;
