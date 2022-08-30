@@ -12,23 +12,28 @@
 	window.onscroll = function() {
 	
 		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-			alert("바닥에 닿음");
-			$.ajax({
-				type: "post",
-				url: "restaurantList.re?pageNum=${pageInfo.pageNum + 1}",
-				data: {
-					startPage : ${pageInfo.startPage +1}
-				},
-				dataType: "text",
-				
-				success: 
-					function(response) {
-						if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
-							var content = $(response).find("#repeat");
-							$("table").eq(1).append(content);
-						}
+// 			alert("바닥에 닿음");
+			if(${pageInfo.endPage} > ${pageInfo.pageNum}){
+				$.ajax({
+					type: "post",
+					url: "restaurantList.re",
+					data: {
+						pageNum : ${pageInfo.pageNum +1}
 					},
-			});
+					dataType: "text",
+					
+					success: 
+						function(response) {
+							var content = $("#append").html(response).find(".append");
+							if(content !=null)
+	// 						alert(content);
+							if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
+								$("#repeat").append(content);
+							}
+							
+						},
+				});
+			}
 		} 
 	}
 
@@ -45,19 +50,18 @@
 			<th> 사진 </th>
 		</tr>
 	</table>
-	<section id="repeat">
-	<table border="1">
+	<table border="1" id="repeat">
 		<c:choose>
-			<c:when test="${empty restaurantInfo  and pageInfo.listCount le 0 }">
-				<tr>
-					<td colspan="4">
-						게시된 식당이 없습니다.
-					</td>
-				</tr>
+			<c:when test="${empty restaurantInfo }">
+<!-- 				<tr> -->
+<!-- 					<td colspan="4"> -->
+<!-- 						게시된 식당이 없습니다. -->
+<!-- 					</td> -->
+<!-- 				</tr> -->
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${restaurantInfo }" var="resInfo">
-					<tr onclick="location.href='restaurantDetail.re?resName=${resInfo.resName}'">
+					<tr onclick="location.href='restaurantDetail.re?resName=${resInfo.resName}'" class="append">
 						<td>${resInfo.resName }</td>
 						<td>${resInfo.rating }</td>
 						<td>${resInfo.reviewCount }</td>
@@ -67,10 +71,13 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-	</section>
+	<section id="append" style="display: none;">
 	
+	</section>
+	<section id="buttons">
 	<button onclick="location.href='restaurantWriteForm.re'">글쓰기</button>
 	<button onclick="location.href='resCategory.re'">카테고리 보기</button>
 	<button onclick="location.href='index.jsp'">홈으로</button>
+	</section>
 </body>
 </html>

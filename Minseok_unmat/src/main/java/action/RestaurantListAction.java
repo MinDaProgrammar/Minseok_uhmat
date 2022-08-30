@@ -49,10 +49,13 @@ public class RestaurantListAction implements Action {
 		String category = request.getParameter("category");
 		List<RestaurantInfoDTO> list = null;
 		//카테고리로 검색될 경우
+		
 		if(category != null) {
 			list = service.selelctRestaurantList(pageNum,listLimit,category);
+			System.out.println("카테고리 "+category+"로 검색됨!");
 		}else { //전체 검색일 경우
-			list = service.selelctRestaurantList(pageNum,listLimit);			
+			list = service.selelctRestaurantList(pageNum,listLimit);	
+			System.out.println("전체 검색됨!");
 		}
 		
 		
