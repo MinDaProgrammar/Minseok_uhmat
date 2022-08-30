@@ -14,7 +14,6 @@
 		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 // 			alert("바닥에 닿음");
 			if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}){
-// 				alert("pageNum: "+${pageInfo.pageNum}+", endPage: "+${pageInfo.endPage});
 				$.ajax({
 					type: "post",
 					url: "restaurantList.re",
