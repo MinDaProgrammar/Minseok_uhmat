@@ -52,6 +52,31 @@ public class RestaurantDAO {
 		return listCount;
 	}
 	
+	//전체 카테고리 목록의 게시물의 개수를 가져옴
+	public int selectListCount(String category) {
+		System.out.println("RestaurantDAO-selectListCount(category)");
+		int listCount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM restaurant_info WHERE category=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, category);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectListCount - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
 	//전체 목록을 페이징 처리하여 조회
 	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, int listLimit) {
 		System.out.println("RestaurantDAO-selectRestaurantList");
@@ -98,9 +123,56 @@ public class RestaurantDAO {
 		return list;
 	}
 	
-	//선택된 카테고리 목록을 페이징처리하여 조회 
+	//키워드로 검색된 레스토랑 오버라이딩 2 값들 받아오기
+	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, String keyword, int listLimit) {
+		System.out.println("RestaurantDAO-selectRestaurantList(int pageNum, String keyword, int listLimit)");
+		List<RestaurantInfoDTO> list = null;
+		int startPage = (pageNum-1)*listLimit;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM restaurant_info WHERE res_name LIKE ? ORDER BY res_name LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, '%'+keyword+'%');
+			pstmt.setInt(2, startPage);
+			pstmt.setInt(3, listLimit);
+			rs = pstmt.executeQuery();
+			
+
+			list = new ArrayList<RestaurantInfoDTO>();
+
+			while(rs.next()) {
+				RestaurantInfoDTO dto = new RestaurantInfoDTO();
+				dto.setResName(rs.getString("res_name"));
+				dto.setrPostcode(rs.getString("r_postcode"));
+
+				dto.setAddress(rs.getString("address"));
+				dto.setPhoneNumber(rs.getString("phone_number"));
+				dto.setOpentime(rs.getString("opentime"));
+				dto.setResLink(rs.getString("res_link"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setReviewCount(rs.getInt("reviewCount"));
+				dto.setRating(rs.getFloat("rating"));
+				dto.setCategory(rs.getString("category"));
+				System.out.println(dto);
+
+				list.add(dto);				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectRestaurantList - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+	
+	//선택된 카테고리 목록을 페이징처리하여 조회 (오버라이딩3)
 	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, int listLimit, String category) {
-		System.out.println("RestaurantDAO-selectRestaurantList");
+		System.out.println("RestaurantDAO-selectRestaurantList(int pageNum, int listLimit, String category)");
 		List<RestaurantInfoDTO> list = null;
 		int startPage = (pageNum-1)*listLimit;
 		PreparedStatement pstmt = null;
@@ -145,6 +217,55 @@ public class RestaurantDAO {
 		
 		return list;
 	}
+	
+	//오버라이딩4. 키워드랑 카테고리가 다 검색된 레스토랑
+	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, int listLimit, String category, String keyword) {
+		System.out.println("RestaurantDAO-selectRestaurantList(int pageNum, int listLimit, String category, String keyword)");
+		List<RestaurantInfoDTO> list = null;
+		int startPage = (pageNum-1)*listLimit;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM restaurant_info WHERE category=? AND res_name LIKE ? ORDER BY res_name LIMIT ?,?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, keyword);
+			pstmt.setInt(3, startPage);
+			pstmt.setInt(4, listLimit);
+			rs = pstmt.executeQuery();
+			
+
+			list = new ArrayList<RestaurantInfoDTO>();
+
+			while(rs.next()) {
+				RestaurantInfoDTO dto = new RestaurantInfoDTO();
+				dto.setResName(rs.getString("res_name"));
+				dto.setrPostcode(rs.getString("r_postcode"));
+
+				dto.setAddress(rs.getString("address"));
+				dto.setPhoneNumber(rs.getString("phone_number"));
+				dto.setOpentime(rs.getString("opentime"));
+				dto.setResLink(rs.getString("res_link"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setReviewCount(rs.getInt("reviewCount"));
+				dto.setRating(rs.getFloat("rating"));
+				dto.setCategory(rs.getString("category"));
+				
+				System.out.println(dto);
+
+				list.add(dto);				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectRestaurantList - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return list;
+	}	
 
 	//식당 정보 입력
 
@@ -330,6 +451,7 @@ public class RestaurantDAO {
 		
 	}
 
+	//식당 정보 수정
 	public int modifyResInfo(RestaurantInfoDTO dto) {
 		int modifyCount = 0;
 		System.out.println("RestaurantDAO - modifyResInfo()");
@@ -358,6 +480,7 @@ public class RestaurantDAO {
 		return modifyCount;
 	}
 
+	//음식점 위치 정보 수정 
 	public int updateMapInfo(MapDTO map) {
 		System.out.println("RestaurantDAO - updateMapInfo()");
 		int updateCount = 0;
@@ -379,6 +502,49 @@ public class RestaurantDAO {
 		return updateCount;
 	}
 
+	public ArrayList<RestaurantInfoDTO> selectMapList(String keyword) {
+		System.out.println("RestaurantDAO - selectMapList");
+		ArrayList<RestaurantInfoDTO> list =null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM restaurant_info WHERE res_name LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			
+			rs = pstmt.executeQuery();
+			
+			list = new ArrayList<RestaurantInfoDTO>();
+			
+			while(rs.next()) {
+				RestaurantInfoDTO dto = new RestaurantInfoDTO();
+				dto.setResName(rs.getString("res_name"));
+				dto.setrPostcode(rs.getString("r_postcode"));
+				dto.setAddress(rs.getString("address"));
+				dto.setRating(rs.getFloat("rating"));
+				dto.setPhoneNumber(rs.getString("phone_number"));
+				dto.setOpentime(rs.getString("opentime"));
+				dto.setResLink(rs.getString("res_link"));
+				dto.setPhoto(rs.getString("photo"));
+				dto.setResInfo(rs.getString("res_info"));
+				dto.setReviewCount(rs.getInt("reviewCount"));
+				dto.setLatitude(rs.getDouble("latitude"));
+				dto.setLongitude(rs.getDouble("longitude"));
+				dto.setCategory(rs.getString("category"));
+				list.add(dto);
+			}
+			System.out.println("selectMapList - list : " + list);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectMapList() - SQL 구문 오류!");
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
 	
-
 }

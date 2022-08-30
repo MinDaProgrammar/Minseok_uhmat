@@ -18,12 +18,15 @@
 					type: "post",
 					url: "restaurantList.re",
 					data: {
-						pageNum : ${pageInfo.pageNum +1}
+						pageNum : ${pageInfo.pageNum +1},
+						category : "${param.category}",
+						keyword : "${param.keyword}"
 					},
 					dataType: "text",
 					
 					success: 
 						function(response) {
+// 							alert("실행됨");
 							var content = $("#append").html(response).find(".append");
 							if(content !=null)
 	// 						alert(content);
@@ -37,11 +40,18 @@
 		} 
 	}
 
+	$(function(){
+		$("#keywordSelect").on("click",function(){
+			location.href="restaurantList.re?keyword="+$("#keyword").val();
+		});
+	});
 </script>
 </head>
 <body>
+	<jsp:include page="../../inc/header.jsp"></jsp:include>
 	<h1>restaurantList Page</h1>
-	
+	<input type="text" placeholder="음식점을 검색하세요" id="keyword" name="keyword" size="15"> 
+	<input type="button" value="검색" id="keywordSelect">
 	<table border="1">
 		<tr>
 			<th> 식당이름 </th>

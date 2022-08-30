@@ -24,6 +24,8 @@ public class RestaurantInfoDTO {
 	private String photo; //식당 사진
 	private float rating;	//별점
 	private int reviewCount; //식당 리뷰 개수
+	private double longitude;	//지도 위도
+	private double latitude;	//지도 경도
 	private String category; // 식당 카테고리 (DB 수정 필요)
 	
 	@Override
@@ -99,5 +101,21 @@ public class RestaurantInfoDTO {
 	}
 	public void setReviewCount(int reviewCount) {
 		this.reviewCount = reviewCount;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 }

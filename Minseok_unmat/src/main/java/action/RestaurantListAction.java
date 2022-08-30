@@ -12,10 +12,19 @@ public class RestaurantListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = null;
 		System.out.println("RestaurantListAction");
-		
+		String category = request.getParameter("category"); 	//카테고리 검색시 가져오기
+		String keyword = request.getParameter("keyword");
+		System.out.println("==============================");
+		System.out.println("category: "+category);
+		System.out.println("keyword: "+keyword);
 		RestaurantListService service = new RestaurantListService();
 		//1. 페이지 계산하는 메서드
-		int listCount = service.getListCount();
+		int listCount = 0;
+		if(category!=null) {
+			listCount = service.getListCount(category);
+		}else {
+			listCount = service.getListCount();
+		}
 		int pageNum = 1; // 현재 페이지 번호(기본값 1 페이지로 설정)
 		int listLimit = 3; // 한 페이지 당 표시할 게시물 수
 		int pageLimit = 10; // 한 페이지 당 표시할 페이지 목록 수
@@ -46,16 +55,26 @@ public class RestaurantListAction implements Action {
 		System.out.println("listLimit: "+listLimit);
 		
 		//2.페이지 개수만큼의 글 목록을 가져오기 
-		String category = request.getParameter("category");
+		
 		List<RestaurantInfoDTO> list = null;
 		//카테고리로 검색될 경우
 		
 		if(category != null) {
-			list = service.selelctRestaurantList(pageNum,listLimit,category);
-			System.out.println("카테고리 "+category+"로 검색됨!");
-		}else { //전체 검색일 경우
-			list = service.selelctRestaurantList(pageNum,listLimit);	
-			System.out.println("전체 검색됨!");
+			if(keyword!=null) {	//검색어 있을 때
+				list = service.selelctRestaurantList(pageNum,listLimit,category,keyword);
+				System.out.println("카테고리+ 키워드로 검색됨!");
+			}else {
+				list = service.selelctRestaurantList(pageNum,listLimit,category);
+				System.out.println("카테고리 "+category+"로 검색됨!");				
+			}
+		}else { //전체 조회일 경우
+			if(keyword!=null) {	//검색어 있을 때
+				list = service.selelctRestaurantList(pageNum,keyword,listLimit);
+				System.out.println("키워드로 검색됨!");
+			}else {
+				list = service.selelctRestaurantList(pageNum,listLimit);	
+				System.out.println("전체 검색됨!");				
+			}
 		}
 		
 		
