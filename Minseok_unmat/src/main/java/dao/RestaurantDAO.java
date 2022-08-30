@@ -52,7 +52,7 @@ public class RestaurantDAO {
 		return listCount;
 	}
 	
-	//전체 카테고리 목록의 게시물의 개수를 가져옴
+	//전체 카테고리 목록의 게시물의 개수를 가져옴 (오버라이딩2)
 	public int selectListCount(String category) {
 		System.out.println("RestaurantDAO-selectListCount(category)");
 		int listCount=0;
@@ -77,6 +77,60 @@ public class RestaurantDAO {
 		
 		return listCount;
 	}
+	
+	//카테고리에 해당하는 검색어만 입력
+	public int selectListCount(String category, String keyword) {
+		System.out.println("RestaurantDAO-selectListCount(category,keyword)");
+		int listCount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM restaurant_info WHERE category=? AND res_name LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, '%'+keyword+'%');
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectListCount - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+
+	//검색어만 입력
+	public int selectListCount(int i, String keyword) {
+		System.out.println("RestaurantDAO-selectListCount(keyword)");
+		int listCount=0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT COUNT(*) FROM restaurant_info WHERE res_name LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, '%'+keyword+'%');
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("selectListCount - SQL 구문 오류!");
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
 	//전체 목록을 페이징 처리하여 조회
 	public List<RestaurantInfoDTO> selectRestaurantList(int pageNum, int listLimit) {
 		System.out.println("RestaurantDAO-selectRestaurantList");
@@ -554,5 +608,6 @@ public class RestaurantDAO {
 		
 		return list;
 	}
+
 	
 }

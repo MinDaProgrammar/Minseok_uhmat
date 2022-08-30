@@ -20,8 +20,20 @@ public class RestaurantListAction implements Action {
 		RestaurantListService service = new RestaurantListService();
 		//1. 페이지 계산하는 메서드
 		int listCount = 0;
-		if(category!=null) {
+		
+		/*
+		 * 1.검색어와 카테고리 2다 존재
+		 * 2. 검색어만 존재
+		 * 3. 카테고리만 존재
+		 * 4. 전체 선택 (둘다 없음)
+		 */
+		if(category!=null && keyword!=null) {
+			listCount = service.getListCount(category,keyword);
+		}
+		else if(category!=null) {
 			listCount = service.getListCount(category);
+		}else if(keyword!=null){
+			listCount = service.getListCount(1,keyword);	//카테고리와 다른 메서드 오버라이딩 하기 위해 임의의 파라미터 1 전달
 		}else {
 			listCount = service.getListCount();
 		}
