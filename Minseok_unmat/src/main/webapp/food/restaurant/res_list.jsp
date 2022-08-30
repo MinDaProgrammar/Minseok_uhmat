@@ -8,12 +8,13 @@
 <title>Insert title here</title>
 <script src="js/jquery-3.6.0.js"></script>
 <script>
+	var isRun = false;
 	//스크롤 이벤트 발생
 	window.onscroll = function() {
-	
 		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
 // 			alert("바닥에 닿음");
-			if(${pageInfo.endPage} > ${pageInfo.pageNum}){
+			if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}){
+// 				alert("pageNum: "+${pageInfo.pageNum}+", endPage: "+${pageInfo.endPage});
 				$.ajax({
 					type: "post",
 					url: "restaurantList.re",
@@ -27,23 +28,22 @@
 						<%} %>
 					},
 					dataType: "text",
-					
-					success: 
-						function(response) {
-// 							alert("실행됨");
-							var content = $("#append").html(response).find(".append");
-							if(content !=null)
-	// 						alert(content);
-							if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
-								$("#repeat").append(content);
-							}
-							
-						},
+					async : false,
+					success: function(response) {
+						isRun  = false;
+// 						alert("실행됨");
+						var content = $("#append").html(response).find(".append");
+						if(content !=null)
+// 						alert(content);
+						if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
+							$("#repeat").append(content);
+						}		
+					},
 				});
 			}
 		} 
 	}
-
+	
 	$(function(){
 		$("#keywordSelect").on("click",function(){
 			location.href="restaurantList.re?keyword="+$("#keyword").val();

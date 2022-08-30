@@ -506,8 +506,8 @@ public class RestaurantDAO {
 		System.out.println("RestaurantDAO - selectMapList");
 		ArrayList<RestaurantInfoDTO> list =null;
 		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement pstmt = null, pstmt2=null;
+		ResultSet rs = null,rs2=null;
 		
 		try {
 			String sql = "SELECT * FROM restaurant_info WHERE res_name LIKE ?";
@@ -530,9 +530,17 @@ public class RestaurantDAO {
 				dto.setPhoto(rs.getString("photo"));
 				dto.setResInfo(rs.getString("res_info"));
 				dto.setReviewCount(rs.getInt("reviewCount"));
-				dto.setLatitude(rs.getDouble("latitude"));
-				dto.setLongitude(rs.getDouble("longitude"));
 				dto.setCategory(rs.getString("category"));
+				
+				//식당 이름에 해당하는 식당 위치정보 입력!
+				sql = "SELECT*FROM map WHERE res_name=?";
+				pstmt2 = con.prepareStatement(sql);
+				pstmt2.setString(1, rs.getString("res_name"));
+				rs2 = pstmt2.executeQuery();
+				while(rs2.next()) {
+					dto.setLatitude(rs.getDouble("latitude"));
+					dto.setLongitude(rs.getDouble("longitude"));
+				}
 				list.add(dto);
 			}
 			System.out.println("selectMapList - list : " + list);

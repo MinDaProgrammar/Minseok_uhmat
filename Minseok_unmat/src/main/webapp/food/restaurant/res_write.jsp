@@ -81,7 +81,7 @@ table{
 				<tr>
 					<th><label for="category">카테고리 선택</label></th>
 					<td>
-						<select name="category">
+						<select name="category" required="required">
 							<option value="" selected="selected">선택</option>
 							<option value="족발·보쌈">족발·보쌈</option>
 							<option value="찜·탕·찌개">찜·탕·찌개</option>

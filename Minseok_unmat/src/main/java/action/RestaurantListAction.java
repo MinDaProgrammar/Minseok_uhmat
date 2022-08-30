@@ -53,7 +53,7 @@ public class RestaurantListAction implements Action {
 		System.out.println("pageNum : "+pageNum);
 		System.out.println("startPage: "+startPage);
 		System.out.println("listLimit: "+listLimit);
-		
+		System.out.println("endPage: "+endPage);
 		//2.페이지 개수만큼의 글 목록을 가져오기 
 		
 		List<RestaurantInfoDTO> list = null;
