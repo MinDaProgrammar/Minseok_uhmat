@@ -19,8 +19,12 @@
 					url: "restaurantList.re",
 					data: {
 						pageNum : ${pageInfo.pageNum +1},
+						<%if(request.getParameter("category")!=null){ %>
 						category : "${param.category}",
+						<%} 
+						if(request.getParameter("keyword")!=null){%>
 						keyword : "${param.keyword}"
+						<%} %>
 					},
 					dataType: "text",
 					
