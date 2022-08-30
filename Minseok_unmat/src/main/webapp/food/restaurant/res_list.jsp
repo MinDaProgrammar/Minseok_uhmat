@@ -12,7 +12,7 @@
 	window.onscroll = function() {
 	
 		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-// 			alert("바닥에 닿음");
+			alert("바닥에 닿음");
 			$.ajax({
 				type: "post",
 				url: "restaurantList.re?pageNum=${pageInfo.pageNum + 1}",
@@ -23,8 +23,9 @@
 				
 				success: 
 					function(response) {
-						if(${pageInfo.endPage} > ${pageInfo.pageNum + 1}) {
-							$("#append").html(response);
+						if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
+							var content = $(response).find("#repeat");
+							$("table").eq(1).append(content);
 						}
 					},
 			});
@@ -43,9 +44,11 @@
 			<th> 리뷰 개수</th>
 			<th> 사진 </th>
 		</tr>
-		
+	</table>
+	<section id="repeat">
+	<table border="1">
 		<c:choose>
-			<c:when test="${empty restaurantInfo }">
+			<c:when test="${empty restaurantInfo  and pageInfo.listCount le 0 }">
 				<tr>
 					<td colspan="4">
 						게시된 식당이 없습니다.
@@ -64,10 +67,8 @@
 			</c:otherwise>
 		</c:choose>
 	</table>
-	
-	<section id="append">
-	
 	</section>
+	
 	<button onclick="location.href='restaurantWriteForm.re'">글쓰기</button>
 	<button onclick="location.href='resCategory.re'">카테고리 보기</button>
 	<button onclick="location.href='index.jsp'">홈으로</button>
