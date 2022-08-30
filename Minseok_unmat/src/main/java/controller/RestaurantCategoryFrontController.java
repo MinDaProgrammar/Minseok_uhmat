@@ -9,11 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 
 import action.Action;
 import action.CheckHashAction;
-import action.MapAction;
 import action.RestaurantDeleteAction;
 import action.RestaurantDetailAction;
 import action.RestaurantListAction;
