@@ -92,5 +92,7 @@
 	<button onclick="location.href='resCategory.re'">카테고리 보기</button>
 	<button onclick="location.href='index.jsp'">홈으로</button>
 	</section>
+	
+	<jsp:include page="../../inc/footer.jsp"></jsp:include>
 </body>
 </html>

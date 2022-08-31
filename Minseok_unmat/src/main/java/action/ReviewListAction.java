@@ -13,13 +13,14 @@ public class ReviewListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("===============================================");
 		System.out.println("ReviewListAction");
 		
 		ActionForward forward = null;
 		
 		//페이징 처리를 위한 변수 선언
 		int pageNum = 1;
-		int listLimit = 10;
+		int listLimit = 6;
 		int pageLimit = 10;
 		
 		

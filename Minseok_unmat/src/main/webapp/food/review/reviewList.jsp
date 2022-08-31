@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="food/review/reviewList.css" rel="stylesheet">
+<!-- <link href="food/review/reviewList.css" rel="stylesheet"> -->
 <script src="js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
 	
@@ -21,12 +21,10 @@
 				dataType: "text",
 				success: 
 					function(response) {
-						if(${pageInfo.endPage} == ${pageInfo.pageNum + 1}) {
-							$("#writeForm").remove();
-							$("#header").remove();
-							$("#footer").remove();
-							$("#append").html(response);
-						
+						if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
+							var content = $("#append").html(response).find("#list");
+							$("#list").append(content);
+							
 						}
 					}
 			});
@@ -100,13 +98,8 @@
 </style>
 </head>
 <body>
-	<header id="header"> <!--헤더라인 -->
-<%-- 		<jsp:include page="../inc/"> --%>
-			<hr>
-				<h1>헤더라인</h1>
-			<hr>
-	</header>
-		<aside id="aside"><a href="ReviewWriteForm.re">글 작성</a></aside>
+		<jsp:include page="../../inc/header.jsp"></jsp:include>
+<!-- 		<aside id="aside"><a href="ReviewWriteForm.re">글 작성</a></aside> -->
 
 	<section id="list">
 		<c:choose>
@@ -133,14 +126,9 @@
 			</c:otherwise>
 		</c:choose>
 	</section>
-	<section id="append">
+	<section id="append" style="display: none;">
 	</section>
 
-	<footer id="footer"> <!--푸터라인 -->
-				<hr>
-				<h1>푸터라인</h1>
-				<hr>
-<%-- 		<jsp:include page="../inc/"> --%>
-	</footer>
+	<jsp:include page="../../inc/footer.jsp"></jsp:include>
 </body>
 </html>
