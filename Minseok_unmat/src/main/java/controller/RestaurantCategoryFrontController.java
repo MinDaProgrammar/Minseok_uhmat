@@ -199,15 +199,6 @@ public class RestaurantCategoryFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 
-		}else if(command.equals("/CheckHash.re")) {
-			 try {
-				action = new CheckHashAction();
-				 forward = action.execute(request, response);
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
-
 		}else if (command.equals("/map.re")) {
 
 //			MapAction mapGet = new MapAction();	//여기서부턴 지도  import 작업이 필요함!
