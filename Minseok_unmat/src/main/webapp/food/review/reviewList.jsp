@@ -9,25 +9,26 @@
 <!-- <link href="food/review/reviewList.css" rel="stylesheet"> -->
 <script src="js/jquery-3.6.0.js"></script>
 <script type="text/javascript">
-	
+	var ajaxCall = 0;
 	window.onscroll = function() {
 	
 		if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-		
-			$.ajax({
-				type: "post",
-				url: "ReviewList.re?pageNum=${pageInfo.pageNum + 1}",
-				data: $("#list").serialize(),
-				dataType: "text",
-				success: 
-					function(response) {
-						if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
-							var content = $("#append").html(response).find("#list");
-							$("#list").append(content);
-							
+			if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}){
+				$.ajax({
+					type: "post",
+					url: "ReviewList.re?pageNum=${pageInfo.pageNum + 1}",
+					data: $("#list").serialize(),
+					dataType: "text",
+					success: 
+						function(response) {
+							if(${pageInfo.endPage} >= ${pageInfo.pageNum + 1}) {
+								var content = $("#append").html(response).find("#list");
+								$("#list").append(content);
+								ajaxCall++;
+							}
 						}
-					}
-			});
+				});
+			}
 		}
 	}
 
